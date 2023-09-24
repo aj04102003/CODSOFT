@@ -1,0 +1,43 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    float num1,num2,result;
+    char oper;
+    cout<<"enter the number "<<endl;
+    cin>>num1;
+    
+    cout<<"enter the number"<<endl;
+    cin>>num2;
+    
+    cout<<"choose operation"<<endl;
+    cin>>oper;
+    
+    switch(oper){
+        
+        case '+':
+        result=num1+num2;
+        cout<<"result:"<<num1<<" "<<oper<<" "<<num2<<"="<<result;
+        break;
+        
+        case '-':
+        result=num1-num2;
+        cout<<"result:"<<num1<<" "<<oper<<" "<<num2<<"="<<result;
+        break;
+        
+        case '*':
+        result=num1*num2;
+        cout<<"result:"<<num1<<" "<<oper<<" "<<num2<<"="<<result;
+        break;
+        
+        case '/':
+        result=num1/num1;
+        cout<<"result:"<<num1<<" "<<oper<<" "<<num2<<"="<<result;
+        break;
+        
+        default:
+        cout<<" invalid operation";
+        
+    }
+    return 0;
+}

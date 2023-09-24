@@ -1,0 +1,77 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+// Function to display the Tic-Tac-Toe board
+void displayBoard(const vector<vector<char>>& board) {
+    for (const vector<char>& row : board) {
+        for (char cell : row) {
+            cout << cell << " ";
+        }
+        cout << endl;
+    }
+}
+
+// Function to check if the game is over (win or draw)
+bool isGameOver(const vector<vector<char>>& board, char player) {
+    // Check rows, columns, and diagonals for a win
+    for (int i = 0; i < 3; i++) {
+        if ((board[i][0] == player && board[i][1] == player && board[i][2] == player) ||
+            (board[0][i] == player && board[1][i] == player && board[2][i] == player)) {
+            return true;
+        }
+    }
+
+    if ((board[0][0] == player && board[1][1] == player && board[2][2] == player) ||
+        (board[0][2] == player && board[1][1] == player && board[2][0] == player)) {
+        return true;
+    }
+
+    // Check for a draw
+    for (const vector<char>& row : board) {
+        for (char cell : row) {
+            if (cell != 'X' && cell != 'O') {
+                return false; // There is an empty cell, the game is not over yet
+            }
+        }
+    }
+
+    return true; // All cells are filled, it's a draw
+}
+
+int main() {
+    vector<vector<char>> board(3, vector<char>(3, ' ')); // Initialize an empty 3x3 board
+    char currentPlayer = 'X'; // 'X' starts the game
+
+    while (true) {
+        system("cls"); // Clear the console (for Windows; use "clear" for Linux)
+
+        cout << "Tic-Tac-Toe" << endl;
+        displayBoard(board);
+
+        int row, col;
+        cout << "Player " << currentPlayer << ", enter row (0-2) and column (0-2): ";
+        cin >> row >> col;
+
+        // Check if the cell is empty and the input is within valid range
+        if (row >= 0 && row < 3 && col >= 0 && col < 3 && board[row][col] == ' ') {
+            board[row][col] = currentPlayer;
+
+            if (isGameOver(board, currentPlayer)) {
+                system("cls");
+                cout << "Tic-Tac-Toe" << endl;
+                displayBoard(board);
+                cout << "Player " << currentPlayer << " wins!" << endl;
+                break;
+            }
+
+            // Switch to the other player
+            currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
+        } else {
+            cout << "Invalid move. Try again." << endl;
+        }
+    }
+
+    return 0;
+}
